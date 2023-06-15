@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
-import 'dart:convert' as convert;
 
 class myApi {
   static Future<String> fetchApiData() async {

@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:trial_bloc/c_data/web_services/trial.dart';
-import 'app_router.dart';
 import 'd_constants/strings.dart';
 
 void main() {
@@ -17,13 +16,6 @@ class BreakingBadApp extends StatefulWidget {
 
 class _BreakingBadAppState extends State<BreakingBadApp> {
   String? photoUrl;
-  @override
-  void initState() {
-    // TODO: implement initState
-    // myApi.fetchApiData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
