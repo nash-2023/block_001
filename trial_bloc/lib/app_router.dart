@@ -8,8 +8,8 @@ import 'd_constants/strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  static final _charactersRepos = CharactersWebServices();
-  // static final _charactersCubit = CharactersCubit(carRepo: _charactersRepos);
+  static final CharactersRepo _charactersRepos = CharactersWebServices();
+  // static final CharactersCubit _charactersCubit = CharactersCubit(carRepo: _charactersRepos);
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeScreen:
