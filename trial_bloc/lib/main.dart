@@ -1,12 +1,30 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// import 'package:trial_bloc/c_data/web_services/fake_web_servics.dart';
+// import 'package:trial_bloc/c_data/web_services/characters_web_services.dart';
+// import 'c_data/models/characters.dart';
+// import 'c_data/repos/repos.dart';
+// import 'd_constants/strings.dart';
+
 import 'package:flutter/material.dart';
-import 'package:trial_bloc/c_data/web_services/trial.dart';
-import 'd_constants/strings.dart';
+import 'app_router.dart';
 
 void main() {
-  runApp(BreakingBadApp());
+  runApp(const BreakingBadApp());
 }
 
+class BreakingBadApp extends StatelessWidget {
+  const BreakingBadApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.generateRoute,
+    );
+  }
+}
+
+
+
+/*
 class BreakingBadApp extends StatefulWidget {
   const BreakingBadApp({super.key});
 
@@ -15,48 +33,41 @@ class BreakingBadApp extends StatefulWidget {
 }
 
 class _BreakingBadAppState extends State<BreakingBadApp> {
-  String? photoUrl;
+  List<Character> chars = [];
+  CharactersRepo wbSrv = CharactersWebServices();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          (photoUrl == null)
-              ? const CircularProgressIndicator()
-              : Container(
-                  width: 300,
-                  height: 300,
-                  child: Image.network(
-                    photoUrl!,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-          ElevatedButton(
+      home: Scaffold(
+        appBar: AppBar(
+          actions: [
+            MaterialButton(
               onPressed: () async {
-                String profileNam = await myApi.fetchApiData();
-                print(profileNam);
-                photoUrl = generatePhotoUrl(profileNam);
-                print(photoUrl);
+                chars = await wbSrv.fetchApiData();
+                chars.forEach((element) => print(element.name));
                 setState(() {});
               },
-              child: const Text("Get Photo"))
-        ],
+              child: const Text("Show Actors"),
+            ),
+          ],
+        ),
+        body: Center(
+          child: (chars.isEmpty)
+              ? const CircularProgressIndicator()
+              : ListView.builder(
+                  itemCount: chars.length,
+                  itemBuilder: (context, i) => Container(
+                    width: 300,
+                    height: 300,
+                    child: Image.network(
+                      chars[i].photoUrl,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+        ),
       ),
-    )));
+    );
   }
 }
-
-// class BreakingBadApp extends StatelessWidget {
-//   BreakingBadApp({super.key});
-//   final AppRouter ar = AppRouter();
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       onGenerateRoute: ar.generateRoute,
-//     );
-//   }
-// }
+*/
