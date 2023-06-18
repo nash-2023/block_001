@@ -12,8 +12,8 @@ class CharactersWebServices implements CharactersRepo {
     try {
       //-------------------
       final response = await Dio().get(
-        apiBaseUrl,
-        queryParameters: {'api_key': apiKey},
+        MyStrings.apiBaseUrl,
+        queryParameters: {'api_key': MyStrings.apiKey},
       );
       // print(response.data['results']);
       if (response.statusCode == 200) {

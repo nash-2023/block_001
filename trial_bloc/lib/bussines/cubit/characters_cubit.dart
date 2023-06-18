@@ -1,12 +1,28 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
-import '../../c_data/models/characters.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../c_data/repos/repos.dart';
+import '../../c_data/models/characters.dart';
 import '../view_model/character_vm.dart';
 
 // part 'characters_state.dart';
+
+//---------------------------------------------------------Cubit
+
+class CharactersViewModel extends Cubit<CharactersState> {
+  final CharactersRepo carRepo;
+  CharactersViewModel({required this.carRepo}) : super(CharactersInitial());
+
+  Future<List<CharacterViewModel>> charsVMFetchApiData() async {
+    List<CharacterViewModel> charsListViewModel = [];
+    List<Character> modelData = await carRepo.fetchApiData();
+    charsListViewModel =
+        modelData.map((ch) => CharacterViewModel(character: ch)).toList();
+    emit(CharactersLoaded(characters: charsListViewModel));
+    return charsListViewModel;
+  }
+}
 
 /// characters_state.dart --------------------------------Cubit State--------------
 @immutable
@@ -19,19 +35,20 @@ class CharactersLoaded extends CharactersState {
   CharactersLoaded({required this.characters});
 }
 
-//---------------------------------------------------------Cubit
 
-class CharactersCubit extends Cubit<CharactersState> {
-  final CharactersRepo carRepo;
-  CharactersCubit({required this.carRepo}) : super(CharactersInitial());
+//----------------------------------------------stful
+/*
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
 
-  List<CharacterViewModel> charsListViewModel = [];
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
 
-  Future<List<CharacterViewModel>> charsVMFetchApiData() async {
-    List<Character> modelData = await carRepo.fetchApiData();
-    charsListViewModel =
-        modelData.map((ch) => CharacterViewModel(character: ch)).toList();
-    emit(CharactersLoaded(characters: charsListViewModel));
-    return charsListViewModel;
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
+*/

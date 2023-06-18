@@ -18,7 +18,7 @@ class Character {
       id: json['id'],
       adult: json['adult'],
       name: json['name'],
-      photoUrl: generatePhotoUrl(picLink),
+      photoUrl: MyStrings.generatePhotoUrl(picLink),
     );
   }
 }

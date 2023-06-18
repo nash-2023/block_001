@@ -1,13 +1,14 @@
-const String apiBaseUrl =
-    "https://api.themoviedb.org/3/trending/person/week?language=en-US";
-const String apiKey = "213ad0e9f5a2f6b619c83d4dfc74b211";
-const homeScreen = '/';
-const charDetails = '/char_details';
+class MyStrings {
+  static const String apiBaseUrl =
+      "https://api.themoviedb.org/3/trending/person/week?language=en-US";
+  static const String apiKey = "213ad0e9f5a2f6b619c83d4dfc74b211";
+  static const homeScreen = '/';
+  static const charDetails = '/char_details';
 
-String generatePhotoUrl(String pp) {
-  return "https://image.tmdb.org/t/p/w500${pp}";
+  static String generatePhotoUrl(String pp) {
+    return "https://image.tmdb.org/t/p/w500${pp}";
+  }
 }
-
 /*
 
 http GET 'https://api.themoviedb.org/3/trending/person/day?language=en-US' \
