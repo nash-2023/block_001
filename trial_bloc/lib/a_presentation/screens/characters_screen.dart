@@ -84,7 +84,19 @@ class CharactersScreen extends StatelessWidget {
       ),
       body: BlocBuilder<CharactersViewModel, CharactersState>(
         builder: (context, state) {
-          if (state is CharactersLoaded) {
+          if (state is CharactersInitial) {
+            vm.charsVMFetchApiData();
+            return const Center(
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: CircularProgressIndicator(
+                  color: MyColors.myGrey,
+                  strokeWidth: 5.0,
+                ),
+              ),
+            );
+          } else if (state is CharactersLoaded) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

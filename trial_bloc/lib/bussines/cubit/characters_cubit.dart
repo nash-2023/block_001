@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +22,21 @@ class CharactersViewModel extends Cubit<CharactersState> {
     emit(CharactersLoaded(characters: charsListViewModel));
     return charsListViewModel;
   }
+
+  @override
+  void onChange(Change<CharactersState> change) {
+    super.onChange(change);
+    print(change);
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    print('$error, $stackTrace');
+    super.onError(error, stackTrace);
+  }
 }
 
-/// characters_state.dart --------------------------------Cubit State--------------
+/// characters_state.dart --------------------------------Cubit State-----------
 @immutable
 abstract class CharactersState {}
 
