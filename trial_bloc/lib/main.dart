@@ -5,9 +5,12 @@
 // import 'd_constants/strings.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bussines/cubit/characters_cubit.dart';
 import 'e_router.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const BreakingBadApp());
 }
 

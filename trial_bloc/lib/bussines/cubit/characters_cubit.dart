@@ -22,7 +22,8 @@ class CharactersViewModel extends Cubit<CharactersState> {
     emit(CharactersLoaded(characters: charsListViewModel));
     return charsListViewModel;
   }
-
+/*
+better be in Observer class ::: MyBlocObserver
   @override
   void onChange(Change<CharactersState> change) {
     super.onChange(change);
@@ -33,6 +34,34 @@ class CharactersViewModel extends Cubit<CharactersState> {
   void onError(Object error, StackTrace stackTrace) {
     print('$error, $stackTrace');
     super.onError(error, stackTrace);
+  }
+  */
+}
+
+//// OBserver ------------------------------------------------------------
+class MyBlocObserver extends BlocObserver {
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    print('onCreate -- ${bloc.runtimeType}');
+  }
+
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    print('onChange -- ${bloc.runtimeType}, $change');
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print('onError -- ${bloc.runtimeType}, $error');
+    super.onError(bloc, error, stackTrace);
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    print('onClose -- ${bloc.runtimeType}');
   }
 }
 
