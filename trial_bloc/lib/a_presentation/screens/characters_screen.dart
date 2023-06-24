@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trial_bloc/d_constants/my_colors.dart';
-import '../../bussines/cubit/characters_cubit.dart';
+import '../../bussines/bloc/chrctrs_bloc.dart';
+// import '../../bussines/cubit/characters_cubit.dart';
 
 /*
 class CharactersScreen extends StatefulWidget {
@@ -66,7 +67,7 @@ class CharactersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vm = BlocProvider.of<CharactersViewModel>(context);
+    final vm = BlocProvider.of<ChrctrsBlocVM>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.myYellow,
@@ -75,17 +76,11 @@ class CharactersScreen extends StatelessWidget {
           style: TextStyle(color: MyColors.myGrey),
         ),
         centerTitle: true,
-        actions: [
-          MaterialButton(
-            onPressed: () => vm.charsVMFetchApiData(),
-            child: const Text("Get Data"),
-          ),
-        ],
       ),
-      body: BlocBuilder<CharactersViewModel, CharactersState>(
+      body: BlocBuilder<ChrctrsBlocVM, ChrctrsState>(
         builder: (context, state) {
-          if (state is CharactersInitial) {
-            vm.charsVMFetchApiData();
+          if (state is ChrctrsInitial) {
+            vm.add(EvenInitial());
             return const Center(
               child: SizedBox(
                 width: 100,
@@ -96,7 +91,7 @@ class CharactersScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is CharactersLoaded) {
+          } else if (state is ChrctrsLoaded) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
