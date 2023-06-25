@@ -12,15 +12,4 @@ class ChrctrsLoaded extends ChrctrsState {
   ChrctrsLoaded({
     required this.characters,
   });
-
-  @override
-  bool operator ==(covariant ChrctrsLoaded other) {
-    if (identical(this, other)) return true;
-    final listEquals = const DeepCollectionEquality().equals;
-
-    return listEquals(other.characters, characters);
-  }
-
-  @override
-  int get hashCode => characters.hashCode;
 }

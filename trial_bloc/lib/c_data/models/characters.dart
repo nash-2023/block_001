@@ -13,12 +13,12 @@ class Character {
     required this.photoUrl,
   });
   factory Character.fromJson(Map<String, dynamic> json) {
-    String picLink = json['profile_path'];
     return Character(
-      id: json['id'],
-      adult: json['adult'],
-      name: json['name'],
-      photoUrl: MyStrings.generatePhotoUrl(picLink),
-    );
+        id: (json['id'] == null) ? -1 : json['id'],
+        adult: (json['adult'] == null) ? true : json['adult'],
+        name: (json['name'] == null) ? "Donkihoty Flaminko" : json['name'],
+        photoUrl: (json['profile_path'] == null)
+            ? "https://placekitten.com/g/200/300"
+            : MyStrings.generatePhotoUrl(json['profile_path']));
   }
 }

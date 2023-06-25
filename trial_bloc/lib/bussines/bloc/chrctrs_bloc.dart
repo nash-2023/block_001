@@ -19,7 +19,6 @@ class ChrctrsBlocVM extends Bloc<ChrctrsEvent, ChrctrsState> {
     on<EvenInitial>((event, emit) async {
       List<CharacterViewModel> charsListViewModel = [];
       List<Character> modelData = await carRepo.fetchApiData();
-      print(modelData[0].name);
       charsListViewModel =
           modelData.map((ch) => CharacterViewModel(character: ch)).toList();
       emit(ChrctrsLoaded(characters: charsListViewModel));
