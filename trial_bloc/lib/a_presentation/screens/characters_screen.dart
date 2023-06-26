@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trial_bloc/d_constants/my_colors.dart';
 import '../../bussines/bloc/chrctrs_bloc.dart';
+import '../widgets/characterCard.dart';
 // import '../../bussines/cubit/characters_cubit.dart';
 
 /*
@@ -77,10 +78,22 @@ class CharactersScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: BlocBuilder<ChrctrsBlocVM, ChrctrsState>(
+      body: BlocConsumer<ChrctrsBlocVM, ChrctrsState>(
+        listener: (context, state) {
+          if (state is ChrctrsError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.msg)),
+            );
+          }
+        },
         builder: (context, state) {
           if (state is ChrctrsInitial) {
             vm.add(EvenInitial());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.red,
+            ));
+          } else if (state is ChrctrsLoading) {
             return const Center(
               child: SizedBox(
                 width: 100,
@@ -92,27 +105,13 @@ class CharactersScreen extends StatelessWidget {
               ),
             );
           } else if (state is ChrctrsLoaded) {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemCount: state.characters.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: Image.network(
-                      state.characters[index].photoUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
+            return CharacterCard(
+              charState: state,
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
       ),

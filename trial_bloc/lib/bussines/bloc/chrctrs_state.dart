@@ -13,3 +13,12 @@ class ChrctrsLoaded extends ChrctrsState {
     required this.characters,
   });
 }
+
+class ChrctrsLoading extends ChrctrsState {}
+
+class ChrctrsError extends ChrctrsState {
+  final String msg;
+  ChrctrsError({
+    required this.msg,
+  });
+}

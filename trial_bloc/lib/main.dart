@@ -11,7 +11,7 @@ import 'bussines/bloc/bloc_opserver.dart';
 import 'e_router.dart';
 
 void main() {
-  // Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   runApp(const BreakingBadApp());
 }
 
