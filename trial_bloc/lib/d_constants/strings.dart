@@ -6,7 +6,7 @@ class MyStrings {
   static const charDetails = '/char_details';
 
   static String generatePhotoUrl(String pp) {
-    return "https://image.tmdb.org/t/p/w500${pp}";
+    return "https://image.tmdb.org/t/p/w500$pp";
   }
 }
 /*

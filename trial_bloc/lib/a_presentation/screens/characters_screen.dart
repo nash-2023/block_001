@@ -90,9 +90,10 @@ class CharactersScreen extends StatelessWidget {
           if (state is ChrctrsInitial) {
             vm.add(EvenInitial());
             return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.red,
-            ));
+              child: CircularProgressIndicator(
+                color: Colors.red,
+              ),
+            );
           } else if (state is ChrctrsLoading) {
             return const Center(
               child: SizedBox(
